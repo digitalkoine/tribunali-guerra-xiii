@@ -1,0 +1,84 @@
+@prefix fjo: <https://digitalkoine.github.io/front-justice/ontology/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+fjo:Case a rdfs:Class ;
+    rdfs:label "Case" ;
+    rdfs:comment "A judicial case / record." .
+
+fjo:Place a rdfs:Class ;
+    rdfs:label "Place" ;
+    rdfs:comment "A place with optional coordinates." .
+
+fjo:ageYears a rdf:Property ;
+    rdfs:label "ageYears" ;
+    rdfs:comment "Age in years (if present)." .
+
+fjo:birthPlace a rdf:Property ;
+    rdfs:label "birthPlace" ;
+    rdfs:comment "Birthplace (or place of origin)." .
+
+fjo:chargeDetail a rdf:Property ;
+    rdfs:label "chargeDetail" ;
+    rdfs:comment "Charge detail (ordered)." .
+
+fjo:childrenNote a rdf:Property ;
+    rdfs:label "childrenNote" ;
+    rdfs:comment "Children/prole note." .
+
+fjo:confiscationFraction a rdf:Property ;
+    rdfs:label "confiscationFraction" ;
+    rdfs:comment "Share of assets confiscated (decimal; 0.0=mentioned but unspecified)." .
+
+fjo:country a rdf:Property ;
+    rdfs:label "country" ;
+    rdfs:comment "Country note for a place." .
+
+fjo:crimeCategory a rdf:Property ;
+    rdfs:label "crimeCategory" ;
+    rdfs:comment "Normalised crime category." .
+
+fjo:dateSentence a rdf:Property ;
+    rdfs:label "dateSentence" ;
+    rdfs:comment "Date of sentence." .
+
+fjo:educationNote a rdf:Property ;
+    rdfs:label "educationNote" ;
+    rdfs:comment "Education/literacy note." .
+
+fjo:executionNote a rdf:Property ;
+    rdfs:label "executionNote" ;
+    rdfs:comment "Execution note (if present)." .
+
+fjo:involvesPerson a rdf:Property ;
+    rdfs:label "involvesPerson" ;
+    rdfs:comment "Links a case to a person." .
+
+fjo:maritalStatusNote a rdf:Property ;
+    rdfs:label "maritalStatusNote" ;
+    rdfs:comment "Marital status note." .
+
+fjo:notes a rdf:Property ;
+    rdfs:label "notes" ;
+    rdfs:comment "Free notes." .
+
+fjo:outcome a rdf:Property ;
+    rdfs:label "outcome" ;
+    rdfs:comment "Outcome / sentence type." .
+
+fjo:province a rdf:Property ;
+    rdfs:label "province" ;
+    rdfs:comment "Province note for a place." .
+
+fjo:rankGroup a rdf:Property ;
+    rdfs:label "rankGroup" ;
+    rdfs:comment "Derived rank group." .
+
+fjo:rankNote a rdf:Property ;
+    rdfs:label "rankNote" ;
+    rdfs:comment "Rank / status note." .
+
+fjo:trialPlace a rdf:Property ;
+    rdfs:label "trialPlace" ;
+    rdfs:comment "Place where the sentence/trial is recorded." .
+

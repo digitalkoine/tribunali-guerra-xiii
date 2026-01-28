@@ -1,0 +1,399 @@
+{
+  "nodes": [
+    {
+      "id": "Case",
+      "label": "Case",
+      "group": "Class",
+      "x": 0,
+      "y": 0,
+      "fixed": true
+    },
+    {
+      "id": "Person",
+      "label": "Person (foaf:Person)",
+      "group": "ExternalClass",
+      "x": 0,
+      "y": -260,
+      "fixed": true
+    },
+    {
+      "id": "Place",
+      "label": "Place",
+      "group": "Class",
+      "x": -380,
+      "y": 200,
+      "fixed": true
+    },
+    {
+      "id": "Literal",
+      "label": "Literal values",
+      "group": "Datatype",
+      "x": 380,
+      "y": 200,
+      "fixed": true
+    },
+    {
+      "id": "prop:dateSentence",
+      "label": "dateSentence",
+      "group": "Datatype",
+      "x": 0,
+      "y": -270,
+      "fixed": true
+    },
+    {
+      "id": "prop:crimeCategory",
+      "label": "crimeCategory",
+      "group": "Datatype",
+      "x": 97,
+      "y": -251,
+      "fixed": true
+    },
+    {
+      "id": "prop:outcome",
+      "label": "outcome",
+      "group": "Datatype",
+      "x": 181,
+      "y": -199,
+      "fixed": true
+    },
+    {
+      "id": "prop:rank",
+      "label": "rank",
+      "group": "Datatype",
+      "x": 241,
+      "y": -120,
+      "fixed": true
+    },
+    {
+      "id": "prop:executionNote",
+      "label": "executionNote",
+      "group": "Datatype",
+      "x": 268,
+      "y": -24,
+      "fixed": true
+    },
+    {
+      "id": "prop:confiscationFraction",
+      "label": "confiscationFraction",
+      "group": "Datatype",
+      "x": 259,
+      "y": 73,
+      "fixed": true
+    },
+    {
+      "id": "prop:birthPlace",
+      "label": "birthPlace",
+      "group": "Datatype",
+      "x": 215,
+      "y": 162,
+      "fixed": true
+    },
+    {
+      "id": "prop:birthProvince",
+      "label": "birthProvince",
+      "group": "Datatype",
+      "x": 142,
+      "y": 229,
+      "fixed": true
+    },
+    {
+      "id": "prop:birthCountry",
+      "label": "birthCountry",
+      "group": "Datatype",
+      "x": 49,
+      "y": 265,
+      "fixed": true
+    },
+    {
+      "id": "prop:birthLat",
+      "label": "birthLat",
+      "group": "Datatype",
+      "x": -49,
+      "y": 265,
+      "fixed": true
+    },
+    {
+      "id": "prop:birthLng",
+      "label": "birthLng",
+      "group": "Datatype",
+      "x": -142,
+      "y": 229,
+      "fixed": true
+    },
+    {
+      "id": "prop:trialPlace",
+      "label": "trialPlace",
+      "group": "Datatype",
+      "x": -215,
+      "y": 162,
+      "fixed": true
+    },
+    {
+      "id": "prop:familyName",
+      "label": "familyName",
+      "group": "Datatype",
+      "x": -259,
+      "y": 73,
+      "fixed": true
+    },
+    {
+      "id": "prop:givenName",
+      "label": "givenName",
+      "group": "Datatype",
+      "x": -268,
+      "y": -24,
+      "fixed": true
+    },
+    {
+      "id": "prop:gender",
+      "label": "gender",
+      "group": "Datatype",
+      "x": -241,
+      "y": -120,
+      "fixed": true
+    },
+    {
+      "id": "prop:ageYears",
+      "label": "ageYears",
+      "group": "Datatype",
+      "x": -181,
+      "y": -199,
+      "fixed": true
+    },
+    {
+      "id": "prop:profession",
+      "label": "profession",
+      "group": "Datatype",
+      "x": -97,
+      "y": -251,
+      "fixed": true
+    }
+  ],
+  "edges": [
+    {
+      "from": "Case",
+      "to": "Person",
+      "title": "Case ↔ Person (record subject)"
+    },
+    {
+      "from": "Case",
+      "to": "prop:dateSentence",
+      "title": "dateSentence (present in 4941 records)"
+    },
+    {
+      "from": "prop:dateSentence",
+      "to": "Literal",
+      "title": "Range: Literal"
+    },
+    {
+      "from": "Case",
+      "to": "prop:crimeCategory",
+      "title": "crimeCategory (present in 4946 records)"
+    },
+    {
+      "from": "prop:crimeCategory",
+      "to": "Literal",
+      "title": "Range: Literal"
+    },
+    {
+      "from": "Case",
+      "to": "prop:outcome",
+      "title": "outcome (present in 4943 records)"
+    },
+    {
+      "from": "prop:outcome",
+      "to": "Literal",
+      "title": "Range: Literal"
+    },
+    {
+      "from": "Case",
+      "to": "prop:rank",
+      "title": "rank (present in 4940 records)"
+    },
+    {
+      "from": "prop:rank",
+      "to": "Literal",
+      "title": "Range: Literal"
+    },
+    {
+      "from": "Case",
+      "to": "prop:executionNote",
+      "title": "executionNote (present in 152 records)"
+    },
+    {
+      "from": "prop:executionNote",
+      "to": "Literal",
+      "title": "Range: Literal"
+    },
+    {
+      "from": "Case",
+      "to": "prop:confiscationFraction",
+      "title": "confiscationFraction (present in 46 records)"
+    },
+    {
+      "from": "prop:confiscationFraction",
+      "to": "Literal",
+      "title": "Range: Literal"
+    },
+    {
+      "from": "Case",
+      "to": "prop:birthPlace",
+      "title": "birthPlace (present in 4938 records)"
+    },
+    {
+      "from": "prop:birthPlace",
+      "to": "Place",
+      "title": "Range: Place"
+    },
+    {
+      "from": "Case",
+      "to": "prop:birthProvince",
+      "title": "birthProvince (present in 4936 records)"
+    },
+    {
+      "from": "prop:birthProvince",
+      "to": "Literal",
+      "title": "Range: Literal"
+    },
+    {
+      "from": "Case",
+      "to": "prop:birthCountry",
+      "title": "birthCountry (present in 4938 records)"
+    },
+    {
+      "from": "prop:birthCountry",
+      "to": "Literal",
+      "title": "Range: Literal"
+    },
+    {
+      "from": "Case",
+      "to": "prop:birthLat",
+      "title": "birthLat (present in 4880 records)"
+    },
+    {
+      "from": "prop:birthLat",
+      "to": "Literal",
+      "title": "Range: Literal"
+    },
+    {
+      "from": "Case",
+      "to": "prop:birthLng",
+      "title": "birthLng (present in 4881 records)"
+    },
+    {
+      "from": "prop:birthLng",
+      "to": "Literal",
+      "title": "Range: Literal"
+    },
+    {
+      "from": "Case",
+      "to": "prop:trialPlace",
+      "title": "trialPlace (present in 4946 records)"
+    },
+    {
+      "from": "prop:trialPlace",
+      "to": "Place",
+      "title": "Range: Place"
+    },
+    {
+      "from": "Case",
+      "to": "prop:familyName",
+      "title": "familyName (present in 4942 records)"
+    },
+    {
+      "from": "prop:familyName",
+      "to": "Literal",
+      "title": "Range: Literal"
+    },
+    {
+      "from": "Case",
+      "to": "prop:givenName",
+      "title": "givenName (present in 4940 records)"
+    },
+    {
+      "from": "prop:givenName",
+      "to": "Literal",
+      "title": "Range: Literal"
+    },
+    {
+      "from": "Case",
+      "to": "prop:gender",
+      "title": "gender (present in 4940 records)"
+    },
+    {
+      "from": "prop:gender",
+      "to": "Literal",
+      "title": "Range: Literal"
+    },
+    {
+      "from": "Case",
+      "to": "prop:ageYears",
+      "title": "ageYears (present in 4920 records)"
+    },
+    {
+      "from": "prop:ageYears",
+      "to": "Literal",
+      "title": "Range: Literal"
+    },
+    {
+      "from": "Case",
+      "to": "prop:profession",
+      "title": "profession (present in 4940 records)"
+    },
+    {
+      "from": "prop:profession",
+      "to": "Literal",
+      "title": "Range: Literal"
+    },
+    {
+      "from": "Person",
+      "to": "prop:familyName",
+      "title": "Person attribute"
+    },
+    {
+      "from": "Person",
+      "to": "prop:givenName",
+      "title": "Person attribute"
+    },
+    {
+      "from": "Person",
+      "to": "prop:gender",
+      "title": "Person attribute"
+    },
+    {
+      "from": "Person",
+      "to": "prop:ageYears",
+      "title": "Person attribute"
+    },
+    {
+      "from": "Person",
+      "to": "prop:profession",
+      "title": "Person attribute"
+    },
+    {
+      "from": "Person",
+      "to": "prop:birthPlace",
+      "title": "Person attribute"
+    },
+    {
+      "from": "Person",
+      "to": "prop:birthProvince",
+      "title": "Person attribute"
+    },
+    {
+      "from": "Person",
+      "to": "prop:birthCountry",
+      "title": "Person attribute"
+    },
+    {
+      "from": "Person",
+      "to": "prop:birthLat",
+      "title": "Person attribute"
+    },
+    {
+      "from": "Person",
+      "to": "prop:birthLng",
+      "title": "Person attribute"
+    }
+  ]
+}

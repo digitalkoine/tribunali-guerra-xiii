@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tribunali di guerra del XIII corpo d'armata dell'esercito italiano — RDF</title>
+  <link rel="stylesheet" href="assets/style.css"/>
+
+  <!-- vis-network (ontology graph) -->
+  <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+
+  <!-- Leaflet (record mini-map) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Embedded data (offline-friendly) -->
+  <script src="assets/data_embed.js"></script>
+  <script src="assets/cases_ttl_embed.js"></script>
+</head>
+<body>
+  <div class="header">
+    <h1>Tribunali di guerra — XIII Corpo d’Armata (Esercito italiano)</h1>
+    <div class="sub">Pacchetto RDF + browser statico (GitHub Pages). Esplorazione dati, grafo dell’ontologia, e query SPARQL.</div>
+  </div>
+
+  <div class="wrap">
+    <div class="tabs">
+      <button class="tab" data-tab="data">Ricerca</button>
+      <button class="tab" data-tab="ontology">Grafo ontologia</button>
+            <button class="tab" data-tab="casegraph">Caso (grafo)</button>
+<button class="tab" data-tab="sparql">SPARQL</button>
+      <button class="tab" data-tab="downloads">Download</button>
+    </div>
+
+    <!-- DATA / RICERCA -->
+    <div id="data" class="tabpane">
+      <div class="grid two">
+        <div class="card">
+          <h2>Esplora e filtra i record</h2>
+          <div class="small">
+            <b>Due ricerche separate</b>: (1) <b>Persona</b> (nome/cognome) e (2) <b>Crimine/giustizia</b> (categoria di crimine, esito, grado, note).
+            A destra trovi anche <b>faccette cliccabili</b> (crimine/persona). Clicca una riga per aprire il record con una mini-mappa del luogo di nascita (quando geocodificato).
+          </div>
+
+          <div class="controls">
+            <input id="qPerson" placeholder="Cerca persona (cognome / nome)"/>
+            <input id="qCrime" placeholder="Cerca crimine / esito / note"/>
+            <select id="outcome"></select>
+            <select id="year"></select>
+            <button id="reset">Reset</button>
+          </div>
+
+          <div class="tablewrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Case ID</th>
+                  <th>Data</th>
+                  <th>Crimine</th>
+                  <th>Esito</th>
+                  <th>Grado</th>
+                  <th>Persona</th>
+                  <th>Genere · età</th>
+                  <th>Professione</th>
+                  <th>Origine</th>
+                  <th>Luogo sentenza</th>
+                </tr>
+              </thead>
+              <tbody id="tbody"></tbody>
+            </table>
+          </div>
+
+          <div class="pager">
+            <button id="prev">Prev</button>
+            <button id="next">Next</button>
+            <span id="pageInfo"></span>
+            <span>·</span>
+            <span id="countInfo"></span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Riepilogo + faccette</h2>
+          <div class="small">
+            Indicatori ricalcolati sul sottoinsieme filtrato. Le faccette mostrano i valori più frequenti (clic per mettere in evidenza un valore).
+          </div>
+
+          <div class="facets">
+            <div class="card" style="background:rgba(0,0,0,.12)"><b>Record totali</b><div id="kpiTotal" style="font-size:26px;font-weight:900;margin-top:4px">—</div></div>
+            <div class="card" style="background:rgba(0,0,0,.12)"><b>Record filtrati</b><div id="kpiFiltered" style="font-size:26px;font-weight:900;margin-top:4px">—</div></div>
+            <div class="card" style="background:rgba(0,0,0,.12)"><b>Intervallo date</b><div id="kpiRange" style="font-size:14px;margin-top:4px;color:var(--muted)">—</div></div>
+            <div class="card" style="background:rgba(0,0,0,.12)"><b>Crimine top</b><div id="kpiTopCrime" style="font-size:14px;margin-top:4px;color:var(--muted)">—</div></div>
+            <div class="card" style="background:rgba(0,0,0,.12)"><b>Esito top</b><div id="kpiTopOutcome" style="font-size:14px;margin-top:4px;color:var(--muted)">—</div></div>
+
+            <div>
+              <div class="facetTitle">Faccetta: crimine (top)</div>
+              <div id="crimeChips" class="chips"></div>
+            </div>
+
+            <div>
+              <div class="facetTitle">Faccetta: persona (top)</div>
+              <div class="small">Persone più frequenti nel sottoinsieme corrente (clic per focalizzare).</div>
+              <div id="personChips" class="chips"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ONTOLOGY -->
+    <div id="ontology" class="tabpane" style="display:none">
+      <div class="card">
+        <h2>Grafo di conoscenza dell’ontologia (vista sintetica)</h2>
+        <div class="small">
+          Questa vista mostra <b>classi</b> e <b>proprietà</b> effettivamente usate nei dati: le proprietà sono visualizzate come nodi (box) collegati alle classi. Passa il mouse sulle frecce per vedere anche la <b>copertura</b> (quanti record hanno un valore).
+          Serve come “mappa” per capire come interrogare i dati e come sono collegati (es. <code>Case → birthPlace → Place</code>).
+        </div>
+        <div id="graphWrap" style="margin-top:12px">
+          <div id="graph"></div>
+        </div>
+        <div class="small" style="margin-top:10px">
+          Suggerimento: passa il mouse sulle frecce per vedere il nome della proprietà (tooltip). Usa i tasti di navigazione per zoom/pan; il grafo è centrato automaticamente.
+        </div>
+      </div>
+    </div>
+
+    
+    <!-- CASE GRAPH -->
+    <div id="casegraph" class="tabpane" style="display:none">
+      <div class="card">
+        <h2>Grafo di un singolo caso (istanze)</h2>
+        <div class="small">
+          Seleziona un <b>Case ID</b>: il viewer costruisce un micro-grafo a partire dal record (persona, luoghi, crimine, esito, ecc.).
+          È una vista “data-level” (istanze), complementare al grafo dell’ontologia (schema-level).
+        </div>
+
+                <div class="controls" style="margin-top:12px">
+          <input id="caseSearchInput" placeholder="Cerca un caso (nome, luogo, crimine, data, esito…)" style="min-width:420px"/>
+          <button id="caseSearchBtn">Search</button>
+          <span class="small" id="caseSearchCount"></span>
+        </div>
+
+        <div class="card" style="background:rgba(0,0,0,.12); margin-top:10px">
+          <div class="small" style="margin-bottom:8px"><b>Risultati</b> (clicca un risultato per aprire il grafo)</div>
+          <div id="caseSearchResults" class="small"></div>
+        </div>
+
+        <div class="controls" style="margin-top:12px">
+          <input id="caseIdInput" placeholder="Oppure inserisci Case ID (es. 1234)"/>
+          <button id="caseIdPickRandom">Random</button>
+          <button id="caseIdRender">Render</button>
+          <span class="small" id="caseGraphHint"></span>
+        </div>
+
+        <div id="caseGraph" style="margin-top:12px; height:680px; border-radius:16px; border:1px solid rgba(255,255,255,.12); background:rgba(0,0,0,.08)"></div>
+
+        <div class="small" style="margin-top:10px">
+          Suggerimento: puoi cercare un ID dalla tab <b>Ricerca</b> e poi incollarlo qui.
+        </div>
+      </div>
+    </div>
+
+
+    <!-- SPARQL -->
+    <div id="sparql" class="tabpane" style="display:none">
+      <div class="card">
+        <h2>SPARQL — esempi e query libera</h2>
+        <div class="small">
+          Qui puoi: (1) copiare esempi di query e (2) scrivere una query SPARQL personalizzata per estrarre solo i dati che ti servono.
+          Il motore SPARQL gira nel browser (Comunica). Se il CDN è bloccato/offline, questa sezione può non funzionare.
+        </div>
+
+        <div class="controls" style="margin-top:12px">
+          <button id="runSparql">Run query</button>
+          <a id="sparqlDownload" style="display:none" class="chip">Download CSV</a>
+        </div>
+
+        <textarea id="sparqlQuery">PREFIX fjo: &lt;https://digitalkoine.github.io/front-justice/ontology/&gt;
+PREFIX dcterms: &lt;http://purl.org/dc/terms/&gt;
+
+SELECT ?id ?date ?crime ?outcome
+WHERE {
+  ?case a fjo:Case ;
+        dcterms:identifier ?id ;
+        fjo:dateSentence ?date ;
+        fjo:crimeCategory ?crime ;
+        fjo:outcome ?outcome .
+}
+LIMIT 50</textarea>
+
+        <div id="sparqlStatus">Loading SPARQL engine…</div>
+        <div id="sparqlOut" style="margin-top:12px"></div>
+
+        <div class="small" style="margin-top:12px">
+          Suggerimenti: prova a filtrare per crimine aggiungendo <code>FILTER(?crime = "Diserzione")</code> oppure usa <code>FILTER(CONTAINS(LCASE(STR(?crime)), "diser"))</code>.
+        </div>
+      </div>
+      <script type="module" src="assets/sparql.js"></script>
+    </div>
+
+    <!-- DOWNLOADS -->
+    <div id="downloads" class="tabpane" style="display:none">
+      <div class="card">
+        <h2>Download</h2>
+        <div class="small">RDF grezzo + JSON derivati (usati dall’interfaccia).</div>
+        <ul class="small">
+          <li><a href="front_justice_cases.ttl" download>Dataset RDF (Turtle)</a></li>
+          <li><a href="front_justice_ontology.ttl" download>Ontologia minima (Turtle)</a></li>
+          <li><a href="data/cases.json" download>JSON derivato (browse veloce)</a></li>
+          <li><a href="data/ontology_graph.json" download>JSON grafo ontologia</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Record modal -->
+  <div id="modalOverlay" class="modalOverlay">
+    <div class="modal" role="dialog" aria-modal="true" aria-label="Record details">
+      <div class="modalHead">
+        <h3 id="modalTitle">Record</h3>
+        <div style="display:flex; gap:10px; align-items:center;"><button id="openGraphBtn" class="iconBtn">Open case graph</button><button id="modalClose" class="iconBtn">Close</button></div>
+      </div>
+      <div class="modalGrid">
+        <div class="card" style="background:rgba(0,0,0,.12)">
+          <h2 style="margin-bottom:8px">Dettagli</h2>
+          <div id="recordKV" class="kv"></div>
+        </div>
+        <div class="card" style="background:rgba(0,0,0,.12)">
+          <h2 style="margin-bottom:8px">Mappa origine</h2>
+          <div class="small" id="mapNote">—</div>
+          <div id="birthMap" style="margin-top:10px"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>
