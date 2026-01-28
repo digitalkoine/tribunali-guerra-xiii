@@ -4,7 +4,7 @@ This repository provides a lightweight RDF distribution and a static browser (Gi
 
 **Tribunali di guerra del XIII corpo d'armata dell'esercito italiano**
 
-To access the ontology: https://digitalkoine.github.io/tribunali-guerra-xiii/ 
+## To access the ontology: https://digitalkoine.github.io/tribunali-guerra-xiii/ 
 
 It includes:
 - `front_justice_cases.ttl` — RDF dataset (Turtle)
@@ -13,13 +13,6 @@ It includes:
   - visualise the ontology graph (vis-network)
   - browse and facet-filter records (embedded JSON for speed)
   - run custom SPARQL queries in-browser (Comunica)
-
-## GitHub Pages
-
-1. Push this repository to GitHub.
-2. Go to **Settings → Pages**.
-3. Select the branch (e.g. `main`) and folder `/ (root)`.
-4. Open the published URL.
 
 ## Notes
 
