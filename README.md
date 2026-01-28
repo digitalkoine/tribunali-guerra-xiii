@@ -4,6 +4,8 @@ This repository provides a lightweight RDF distribution and a static browser (Gi
 
 **Tribunali di guerra del XIII corpo d'armata dell'esercito italiano**
 
+To access the ontology: https://digitalkoine.github.io/tribunali-guerra-xiii/ 
+
 It includes:
 - `front_justice_cases.ttl` — RDF dataset (Turtle)
 - `front_justice_ontology.ttl` — minimal ontology (Turtle)
